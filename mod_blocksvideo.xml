@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+
+    <name>MOD_BLOCKSVIDEO</name>
+    <author>Andy Kirk</author>
+    <authorEmail>andy.kirk@npeu.ox.ac.uk</authorEmail>
+    <authorUrl>https://www.npeu.ox.ac.uk</authorUrl>
+    <creationDate>January 2026</creationDate>
+    <copyright>(C) NPEU 2026</copyright>
+    <license>MIT License; see LICENSE.md</license>
+    <group>com_blocks</group>
+
+    <!--  The version string is recorded in the components table -->
+    <version>0.0.1</version>
+    <!-- The description is optional and defaults to the name -->
+    <description>MOD_BLOCKSVIDEO_XML_DESCRIPTION</description>
+
+    <updateservers>
+        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <server type="extension" name="NPEU: mod_blocksvideo Update Site">https://raw.githubusercontent.com/NPEU/mod_blocksvideo/main/update-manifest.xml</server>
+    </updateservers>
+
+    <namespace path="src">NPEU\Module\Blocksvideo</namespace>
+
+    <files>
+        <folder module="mod_blocksvideo">services</folder>
+        <folder>language</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="video_poster"
+                    type="media"
+                    label="MOD_BLOCKSVIDEO_VIDEO_FILE_LABEL"
+                    description="MOD_BLOCKSVIDEO_VIDEO_FILE_DESC"
+                    directory="files/videos"
+                    required="true"
+                />
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>
