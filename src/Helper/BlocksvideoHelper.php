@@ -21,16 +21,17 @@ class BlocksvideoHelper implements DatabaseAwareInterface
     use DatabaseAwareTrait;
 
 
-    /*public function getStuff(Registry $config, SiteApplication $app): array
+    public function getVideo(Registry $config, SiteApplication $app): array
     {
         if (!$app instanceof SiteApplication) {
             return [];
         }
-        $db = $this->getDatabase();
+        //$db = $this->getDatabase();
 
-        // Do some database stuff here.
+        $video = [];
 
-        return ["Hello, world."];
-    }*/
+
+        return $video;
+    }
 
 }
