@@ -40,6 +40,16 @@
                     directory="files/videos"
                     required="true"
                 />
+                <field
+                    name="caption"
+                    type="editor"
+                    label="MOD_BLOCKSVIDEO__CAPTION_LABEL"
+                    description="MOD_BLOCKSVIDEO__CAPTION_DESC"
+                    default=""
+                    required="true"
+                    buttons="true"
+                    filter="\Joomla\CMS\Component\ComponentHelper::filterText"
+                />
             </fieldset>
         </fields>
     </config>

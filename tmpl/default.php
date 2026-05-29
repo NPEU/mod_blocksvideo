@@ -37,18 +37,28 @@ if (!empty($poster_filename)) {
 
         #echo '<pre>'; var_dump(file_exists($)); echo '</pre>'; exit;
         if (file_exists($mp4_filepath)) {
-            $mp4_url = str_replace(JPATH_ROOT . '/', Uri::root(), $mp4_filepath);
+            #$mp4_url = str_replace(JPATH_ROOT . '/', Uri::root(), $mp4_filepath);
+            $mp4_url = str_replace(JPATH_ROOT, '', $mp4_filepath);
             $video_exists = true;
         }
 
-        // We can also check for the webm, but if it's not found we shouldn't abort thw whole thing:
+        // We can also check for the webm, but if it's not found we shouldn't abort the whole thing:
         $webm_filepath = str_replace($parts['filename'], $parts['filename'] . '/' . $parts['filename'], str_replace('.png', '.webm', $img_filepath));
 
         if (file_exists($webm_filepath)) {
-            $webm_url = str_replace(JPATH_ROOT . '/', Uri::root(), $webm_filepath);
+            #$webm_url = str_replace(JPATH_ROOT . '/', Uri::root(), $webm_filepath);
+            $webm_url = str_replace(JPATH_ROOT, '', $webm_filepath);
         }
     }
+
+    // IMPORTANT - the comment mp4 and webm lines above SHOULD be what I need, but for some reason
+    // in ADMIN (only - Site is fine) Joomla adds a leading / to the <srouce> element makgin the
+    // src attribute invalid. I don't know what.
+    // I expect I'll need a template plugin so I can use that to add the full URL back in, but
+    // would be good know why Joomla is doing that.
 }
+
+$caption = $poster_filename = $params->get('caption');
 ?>
 <div class="blocks-container blocksvideo-container">
 <?php if ($module->showtitle): ?>
@@ -56,13 +66,20 @@ if (!empty($poster_filename)) {
 <?php endif; ?>
 
 <?php if ($video_exists) :?>
-<video controls playsinline preload="metadata" poster="<?php echo $img_url; ?>" style="max-width: 100%;">
-    <?php /* if ($webm_url) : ?>
-    <source src="<?php echo $webm_url; ?>" type='video/webm; codecs="vp9, opus"'>
+<figure>
+    <video controls playsinline preload="metadata" poster="<?php echo $img_url; ?>" style="max-width: 100%;">
+        <?php /* if ($webm_url) : ?>
+        <source src="<?php echo $webm_url; ?>" type='video/webm; codecs="vp9, opus"'>
+        <?php endif; ?>
+        */ ?>
+        <source src="<?php echo trim($mp4_url, '/'); ?>"  type='video/mp4; codecs="avc1.4d401f, mp4a.40.2"'>
+    </video>
+    <?php if ($caption) : ?>
+    <figcaption>
+        <?php echo $caption; ?>
+    </figcaption>
     <?php endif; ?>
-    */ ?>
-    <source src="<?php echo $mp4_url; ?>"  type='video/mp4; codecs="avc1.4d401f, mp4a.40.2"'>
-</video>
+</figure>
 <?php else: ?>
 <p>The video could not be found.</p>
 <?php endif; ?>
