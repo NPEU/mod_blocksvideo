@@ -46,8 +46,7 @@
                     label="MOD_BLOCKSVIDEO__CAPTION_LABEL"
                     description="MOD_BLOCKSVIDEO__CAPTION_DESC"
                     default=""
-                    required="true"
-                    buttons="true"
+                    buttons="false"
                     filter="\Joomla\CMS\Component\ComponentHelper::filterText"
                 />
             </fieldset>
